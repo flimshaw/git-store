@@ -1,6 +1,6 @@
 {
   "name": "git-store",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Git-store is koa-middleware that keeps a local copy of a remote git repository in sync, and exposes it to a read-only web api.",
   "bin": {
     "git-store": "./bin/git-store"
