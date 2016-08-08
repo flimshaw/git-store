@@ -22,7 +22,9 @@ So, to create a synced git-store of this very repository, you would run:
 
 `git-store git@github.com:flimshaw/git-store.git`
 
-The repository will be cloned into the current directory in the 'store' subfolder.  Eventually there will be a second argument to specify a destination for the repo, but at the moment that feature is unstable.  While this process is running, the repo will be periodically checked for updates and synced, and a web API will run at localhost:3000 that lets you query the repository in various ways.
+The repository will be cloned into the current directory in the 'store' subfolder.  Eventually there will be a second argument to specify a destination for the repo, but at the moment that feature is unstable.  
+
+While this process is running, the repo will be periodically checked for updates and synced, and a web API will run at localhost:3000 that lets you query the repository in various ways.
 
 ## How to use it as koa middleware
 
@@ -46,7 +48,7 @@ Or, just change the REPO environment variable in the included Dockerfile example
 
 ## API Queries Supported
 
-`/tree/:commit/:path` - returns the git tree at the given path and commit in history
+`/tree/:commit/:path` - returns the git tree at the given path and commit in history.  The commit can also be branch names and HEAD, so for example, `/tree/HEAD~1/` would return the root tree of the repository one commit in the past.
 `/raw/:commit/:path` - streams the file as this path and point in history
 `/gitPull` - POSTs to this url will trigger a git pull, useful for GitHub webhooks
 
