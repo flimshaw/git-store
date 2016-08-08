@@ -22,7 +22,9 @@
   },
   "homepage": "https://github.com/flimshaw/git-store#readme",
   "devDependencies": {
-    "forever": "^0.15.2",
+    "forever": "^0.15.2"
+  },
+  "dependencies": {
     "koa": "^1.2.0",
     "koa-cors": "0.0.16",
     "koa-logger": "^1.3.0",
