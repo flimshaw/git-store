@@ -2,6 +2,8 @@
 
 Git-store is middleware for [koa](http://koajs.com/) that pulls a remote git repository, and auto-updates when that repository changes. It also exposes a concise API for retrieving trees and blobs (ie. file listings and files) from that git repository at any commit in its history.  
 
+*DISCLAIMER*: How stable is this?  Not very!  This has been a side project for a few weeks and this is its maiden voyage on npm.  I hope to improve and stabilize it shortly, especially adding tests, but none of that is there now so YMMV.  If you find a bug, please create an issue, or better yet fix it and send a pull request my way.
+
 ## How to install
 
 To install it as a global command line utility, try:
@@ -48,15 +50,19 @@ Or, just change the REPO environment variable in the included Dockerfile example
 
 ## API Queries Supported
 
-`/tree/:commit/:path` - returns the git tree at the given path and commit in history.  The commit can also be branch names and HEAD, so for example, `/tree/HEAD~1/` would return the root tree of the repository one commit in the past.
-`/raw/:commit/:path` - streams the file as this path and point in history
-`/gitPull` - POSTs to this url will trigger a git pull, useful for GitHub webhooks
+- `/tree/:commit/:path` - returns the git tree at the given path and commit in history.  The commit can also be branch names and HEAD, so for example, `/tree/HEAD~1/` would return the root tree of the repository one commit in the past.
+
+- `/raw/:commit/:path` - streams the file as this path and point in history
+
+- `/gitPull` - POSTs to this url will trigger a git pull, useful for GitHub webhooks
 
 ## API Queries In Progress
 
-`/blame/:commit/:path` - blame diffs for the given commit and path
-`/feed/:page` - get the last 10 commits and modified files
-`/commit/:commit` - retrieve info about a particular commit
+- `/blame/:commit/:path` - blame diffs for the given commit and path
+
+- `/feed/:page` - get the last 10 commits and modified files
+
+- `/commit/:commit` - retrieve info about a particular commit
 
 ## How does it work?
 
@@ -64,15 +70,5 @@ All blobs and trees queried at a specific commit may be considered *permanent*, 
 
 ## Config Defaults
 
-Port: 4444
+Port: 3000
 Protocol: REST / http
-
-## Environment Variable Requirements
-
-### PRIVATE_KEY
-
-Path to a read-only deploy key for the given repository, if it is private.
-
-### REPO
-
-Path to the repository containing your store data.
