@@ -1,0 +1,25 @@
+#!/usr/bin/env node
+'use strict'
+var generators = require('../generators')
+  , GitStore = require('../lib/GitStore')
+  , GitApi = require('../lib/GitApi')
+
+// create a local GitStore object that will stay in sync with remote repo
+let repo = process.argv[2] === undefined ? process.env.REPO : process.argv[2]
+let storePath = process.argv[3] === undefined ? process.env.DEST : process.argv[3]
+
+if(repo === undefined) {
+  console.error("ERROR: No repository specified. Please add the url to a repository you wish to use.")
+  return 1
+}
+
+let gitStore = new GitStore(repo, { storePath: storePath })
+
+let gitApi = new GitApi(gitStore)
+
+// if we're running this file directly, just start up a local API server as well
+if (!module.parent) {
+  let app = require('koa')()
+  app.use(gitApi.api)
+  app.listen(process.env.PORT || 3000)
+}
